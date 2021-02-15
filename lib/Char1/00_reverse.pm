@@ -4,8 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 
 sub rev {
-    my $got = shift;
-    $got = reverse $got;
+    reverse shift;
 }
 
 1;
