@@ -12,4 +12,13 @@ sub getAtIndex {
     return $output;
 }
 
+sub concat {
+    my ($left, $right) = @_;
+    my $output;
+    for (my $i = 0; $i < length $left; $i++) {
+        $output .= getAtIndex($left, $i) . getAtIndex($right, $i);
+    }
+    return $output;
+}
+
 1;
