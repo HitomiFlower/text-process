@@ -61,5 +61,21 @@ subtest "04_element" => sub {
     is_deeply(\%output, $expected, 'test 04_element ok');
 };
 
+subtest "05_n-gram" => sub {
+    my $test = "I am an NLPer";
+    my @got = Char1::TextFunc::n_gram($test, 2, 0);
+    my @expected_char = ("I ", " a", "am", "m ", " a", "an", "n ", " N", "NL", "LP", "Pe", "er");
+
+    is_deeply(\@got, \@expected_char, 'test 05_n-gram by char ok');
+
+    @got = Char1::TextFunc::n_gram($test, 2, 1);
+    my @expected_word = (
+        ["I", "am"],
+        ["am", "an"],
+        ["an", "NLPer"],
+    );
+    is_deeply(\@got, \@expected_word, 'test 05_n-gram by word ok');
+};
+
 done_testing();
 

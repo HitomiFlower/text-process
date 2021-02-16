@@ -2,6 +2,7 @@ package Char1::TextFunc;
 use strict;
 use warnings FATAL => 'all';
 use utf8;
+use 5.32.1;
 
 # 00. 文字列の逆順
 sub rev {
@@ -56,6 +57,28 @@ sub element {
         }
     }
     return %output;
+}
+
+# 05. n-gram
+# ref https://qiita.com/kazmaw/items/4df328cba6429ec210fb
+sub n_gram {
+    my ($str, $n, $by_word) = @_;
+    my @output;
+
+    if ($by_word) {
+        my @words = split /\s+/,$str;
+        my $slen = scalar @words;
+        for (my $i = 0; $i < $slen - $n + 1; $i++) {
+            push @output, [@words[$i .. $i + $n - 1]];
+        }
+    }
+    else {
+        my $slen = length $str;
+        for (my $i = 0; $i < $slen - $n + 1; $i++) {
+            push @output, substr($str, $i, $n);
+        }
+    }
+    return @output;
 }
 
 1;
