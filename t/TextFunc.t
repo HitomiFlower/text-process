@@ -29,7 +29,36 @@ subtest "02_concat" => sub {
 subtest "03_wordCount" => sub {
     my $test = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.";
 
-    is(Char1::TextFunc::wordCount($test), "31415092605358979", 'test 03_wordCount ok');
+    is(Char1::TextFunc::wordCount($test), "314159265358979", 'test 03_wordCount ok');
+};
+
+subtest "04_element" => sub {
+    my $test = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can.";
+    my %output = Char1::TextFunc::element($test);
+    my $expected = {
+        H  => 1,
+        He => 2,
+        Li => 3,
+        Be => 4,
+        B  => 5,
+        C  => 6,
+        N  => 7,
+        O  => 8,
+        F  => 9,
+        Ne => 10,
+        Na => 11,
+        Mi => 12,
+        Al => 13,
+        Si => 14,
+        P  => 15,
+        S  => 16,
+        Cl => 17,
+        Ar => 18,
+        K  => 19,
+        Ca => 20,
+    };
+
+    is_deeply(\%output, $expected, 'test 04_element ok');
 };
 
 done_testing();

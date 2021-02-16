@@ -34,12 +34,28 @@ sub concat {
 # Return the length list of word count in the string
 sub wordCount {
     my $got = shift;
-    my @words = split /\W/, $got;
+    my @words = split /\W+/, $got;
     my $output;
     for my $word (@words) {
         $output .= length $word;
     }
     return $output;
+}
+
+# 04. 元素記号
+sub element {
+    my @words = split /\W+/, shift;
+    my %single = map {$_ => 1} qw/1 5 6 7 8 9 15 16 19/;
+    my %output;
+    for my $i (0 .. scalar(@words) - 1) {
+        if (exists $single{$i + 1}) {
+            $output{substr($words[$i], 0, 1)} = $i + 1;
+        }
+        else {
+            $output{substr($words[$i], 0, 2)} = $i + 1;
+        }
+    }
+    return %output;
 }
 
 1;
