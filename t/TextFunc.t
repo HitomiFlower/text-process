@@ -70,11 +70,27 @@ subtest "05_n-gram" => sub {
 
     @got = Char1::TextFunc::n_gram($test, 2, 1);
     my @expected_word = (
-        ["I", "am"],
-        ["am", "an"],
-        ["an", "NLPer"],
+        [ "I", "am" ],
+        [ "am", "an" ],
+        [ "an", "NLPer" ],
     );
     is_deeply(\@got, \@expected_word, 'test 05_n-gram by word ok');
+};
+
+subtest "06_set" => sub {
+    my ($test_a, $test_b) = ("12345", "34567");
+
+    my @actual = Char1::TextFunc::union($test_a, $test_b);
+    my $expected = [ "12", "23", "34", "45", "56", "67" ];
+    is_deeply(\@actual, $expected, 'test 06_union ok');
+
+    @actual = Char1::TextFunc::intersection($test_a, $test_b);
+    $expected = [ "34", "45" ];
+    is_deeply(\@actual, $expected, 'test 06_intersection ok');
+
+    @actual = Char1::TextFunc::complement($test_a, $test_b, 3);
+    $expected = [ "123", "234" ];
+    is_deeply(\@actual, $expected, 'test 06_complement ok');
 };
 
 done_testing();

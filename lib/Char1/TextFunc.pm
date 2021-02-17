@@ -66,10 +66,10 @@ sub n_gram {
     my @output;
 
     if ($by_word) {
-        my @words = split /\s+/,$str;
+        my @words = split /\s+/, $str;
         my $slen = scalar @words;
         for (my $i = 0; $i < $slen - $n + 1; $i++) {
-            push @output, [@words[$i .. $i + $n - 1]];
+            push @output, [ @words[$i .. $i + $n - 1] ];
         }
     }
     else {
@@ -79,6 +79,43 @@ sub n_gram {
         }
     }
     return @output;
+}
+
+# 06. 集合
+# ref https://blog.kteru.net/perl-array-sum-differentce-product/
+# 和集合
+sub union {
+    my ($a, $b, $n) = @_;
+    $n ||= 2;
+    say "$n";
+    my @a = n_gram($a, $n, 0);
+    my @b = n_gram($b, $n, 0);
+
+    my %cnt = ();
+    my @array = grep {++$cnt{$_} == 1} (@a, @b);
+}
+
+# 積集合
+sub intersection {
+    my ($a, $b, $n) = @_;
+    $n ||= 2;
+    my @a = n_gram($a, $n, 0);
+    my @b = n_gram($b, $n, 0);
+
+    my %cnt = ();
+    my @array = grep {++$cnt{$_} == 2} (@a, @b);
+}
+
+# 差集合
+sub complement {
+    my ($a, $b, $n) = @_;
+    $n ||= 2;
+    my @a = n_gram($a, $n, 0);
+    my @b = n_gram($b, $n, 0);
+
+    my %cnt = ();
+    map {$cnt{$_}--} @b;
+    my @array = grep {++$cnt{$_} == 1} @a
 }
 
 1;
