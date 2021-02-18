@@ -100,5 +100,13 @@ subtest "07_template" => sub {
     is($actual, $expected, 'test 07_template ok');
 };
 
+subtest "08_cipher" => sub {
+    my $test = "Hello world!";
+    my $expected = "Hvool dliow!";
+    my $actual = Char1::TextFunc::cipher($test);
+
+    is($actual, $expected, 'test 08_cipher ok');
+};
+
 done_testing();
 

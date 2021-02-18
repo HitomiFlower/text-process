@@ -127,4 +127,13 @@ sub template {
     sprintf(TEMP, $a, $b, $c);
 }
 
+# 08. 暗号文
+sub cipher {
+    my $str = shift;
+    my @nums = unpack "C*", $str;
+    @nums = map {$_ >= 97 && $_ <= 122 ? 219 - $_ : $_} @nums;
+
+    pack "C*", @nums;
+}
+
 1;
