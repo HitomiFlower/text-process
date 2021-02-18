@@ -93,5 +93,12 @@ subtest "06_set" => sub {
     is_deeply(\@actual, $expected, 'test 06_complement ok');
 };
 
+subtest "07_template" => sub {
+    my $actual = Char1::TextFunc::template(12, "気温", 22.4);
+    my $expected = "12時の気温は22.4";
+
+    is($actual, $expected, 'test 07_template ok');
+};
+
 done_testing();
 

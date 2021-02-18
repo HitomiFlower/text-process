@@ -118,4 +118,13 @@ sub complement {
     my @array = grep {++$cnt{$_} == 1} @a
 }
 
+# 07. テンプレートによる文生成
+sub template {
+    my ($a, $b, $c) = @_;
+
+    use constant TEMP => "%s時の%sは%s";
+
+    sprintf(TEMP, $a, $b, $c);
+}
+
 1;
