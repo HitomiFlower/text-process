@@ -4,6 +4,8 @@ use warnings FATAL => 'all';
 use utf8;
 use 5.32.1;
 
+use List::Util;
+
 # 00. 文字列の逆順
 sub rev {
     reverse shift;
@@ -134,6 +136,25 @@ sub cipher {
     @nums = map {$_ >= 97 && $_ <= 122 ? 219 - $_ : $_} @nums;
 
     pack "C*", @nums;
+}
+
+# 09. Typoglycemia
+sub typoglycemia {
+    my $str = shift;
+    my $str_copy = $str;
+    # my @words = split /\s+/, $str;
+    while ($str =~ m/(\w+)/g) {
+        next if length($1) < 4;
+        my $slen = length($1);
+        my $start_offset = pos($str) - $slen + 1;
+        my $word_middle_length = $slen - 2;
+
+        my $word_middle = substr($str, $start_offset, $word_middle_length);
+        my $shuffled_middle = join('', List::Util::shuffle(split(//, $word_middle)));
+        substr($str_copy, $start_offset, $word_middle_length) = $shuffled_middle;
+    }
+
+    return $str_copy;
 }
 
 1;

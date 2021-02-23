@@ -108,5 +108,15 @@ subtest "08_cipher" => sub {
     is($actual, $expected, 'test 08_cipher ok');
 };
 
+subtest "09_typoglycemia" => sub {
+    my $test = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind.";
+    # ref https://chalow.net/2015-09-16-1.html
+    srand 4649;
+    my $expected = "I cdouln't bvleiee that I cluod aclultay usandtnerd waht I was rdineag : the paennemhol pwoer of the hmuan mnid.";
+    my $actual = Char1::TextFunc::typoglycemia($test);
+    is($actual, $expected, 'test 09_typoglycemia ok');
+
+};
+
 done_testing();
 
