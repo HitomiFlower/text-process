@@ -1,0 +1,33 @@
+10. 行数のカウント
+wc hightemp.txt
+
+11. タブをスペースに置換
+perl -wp -e 's/\t/ /g' hightemp.txt
+sed -E 's/\t/ /g' hightemp.txt
+cat hightemp.txt | tr '\t' ' '
+expand -t 1 hightemp.txt
+
+12. 1列目をcol1.txtに，2列目をcol2.txtに保存
+cut -f 1 hightemp.txt > col1.txt
+
+13. col1.txtとcol2.txtをマージ
+paste col1.txt col2.txt
+
+14. 先頭からN行を出力
+head -n 5 hightemp.txt
+
+15. 末尾のN行を出力
+tail -n 5 hightemp.txt
+
+16. ファイルをN分割する
+split -l 5 hightemp.txt split_
+
+17. １列目の文字列の異なり
+sort hightemp.txt | uniq -w 3
+
+18. 各行を3コラム目の数値の降順にソート
+sort -nr -k 3 hightemp.txt
+
+19. 各行の1コラム目の文字列の出現頻度を求め，出現頻度の高い順に並べる
+cut -f 1 hightemp.txt | sort | uniq -c | sort -nr
+
