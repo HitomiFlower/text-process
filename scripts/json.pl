@@ -11,7 +11,6 @@ open(my $fh, "<:encoding(UTF-8)", "$fileDir/jawiki-country.json")
     or croak('Cannot open the file!');
 binmode(STDOUT, "encoding(UTF-8)");
 
-my $count = 0;
 my %country;
 while (my $line = <$fh>) {
     my $data = parse_json($line);
@@ -20,9 +19,7 @@ while (my $line = <$fh>) {
 
 close $fh;
 
-say "$country{'イギリス'}";
-
-
-
+my @category = $country{'イギリス'} =~ /^\[\[Category:(.+)]]$/mg;
+say join "\n", @category;
 
 
